@@ -1,0 +1,48 @@
+# Python virtual environment
+/env/
+/venv/
+/benv/
+/.env
+/.venv
+
+# Uploads and results folders (if they are not meant to be in git)
+/static/uploads/
+/static/results/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Compiled files
+*.so
+*.o
+
+# Log files
+*.log
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+
+# Temporary frame folder from video processing
+/static/results/temp_frames/

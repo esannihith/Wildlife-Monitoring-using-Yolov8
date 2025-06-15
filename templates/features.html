@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - WildGuard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/unified.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-lucide="shield" class="nav-icon"></i>
+                <span class="brand-name">WildGuard</span>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i data-lucide="menu" class="menu-icon"></i>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link">
+                    <i data-lucide="home" class="nav-link-icon"></i>
+                    Home
+                </a>
+                <a href="/features" class="nav-link">
+                    <i data-lucide="shield" class="nav-link-icon"></i>
+                    Features
+                </a>
+                <a href="/detect" class="nav-link">
+                    <i data-lucide="camera" class="nav-link-icon"></i>
+                    Detection
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="features-section">
+        <div class="features-container">
+            <div class="features-header">
+                <h1 class="features-title">Features</h1>
+                <p class="features-subtitle">
+                    Discover how WildGuard revolutionizes wildlife protection through advanced AI technology 
+                    and automated monitoring systems.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i data-lucide="eye" class="feature-icon"></i>
+                    <h3 class="feature-title">Animal & Human Detection</h3>
+                    <p class="feature-description">
+                        Identifies wildlife and human presence in protected areas for safety and monitoring.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i data-lucide="shield" class="feature-icon"></i>
+                    <h3 class="feature-title">PPE Detection</h3>
+                    <p class="feature-description">
+                        Ensures ranger safety by detecting helmets, vests, and gloves using deep learning.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i data-lucide="target" class="feature-icon"></i>
+                    <h3 class="feature-title">Weapon Detection</h3>
+                    <p class="feature-description">
+                        Detects weapons such as guns, knives, and rifles to prevent poaching and threats.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i data-lucide="layers" class="feature-icon"></i>
+                    <h3 class="feature-title">Multi-Model Detections</h3>
+                    <p class="feature-description">
+                        Simultaneously runs animal/human, PPE, and weapon models on a single input for thorough analysis.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i data-lucide="bell" class="feature-icon"></i>
+                    <h3 class="feature-title">Alert System</h3>
+                    <p class="feature-description">
+                        Triggers alerts when threats or anomalies are detected in submitted images or video feeds.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i data-lucide="shield" class="feature-icon"></i>
+                    <h3 class="feature-title">Enhanced Protection</h3>
+                    <p class="feature-description">
+                        Improved wildlife protection through AI-assisted surveillance and rapid response capabilities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

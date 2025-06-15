@@ -1,0 +1,10 @@
+flask>=2.3.3
+opencv-python>=4.8.0
+inference-sdk==0.9.23
+numpy>=1.20.0
+pytube>=12.1.0
+python-dotenv>=0.19.0
+requests>=2.25.0
+ultralytics>=8.0.0
+torch>=1.7.0
+torchvision>=0.8.1

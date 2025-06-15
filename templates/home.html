@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildGuard - Wildlife Monitoring System</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/unified.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-lucide="shield" class="nav-icon"></i>
+                <span class="brand-name">WildGuard</span>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i data-lucide="menu" class="menu-icon"></i>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link">
+                    <i data-lucide="home" class="nav-link-icon"></i>
+                    Home
+                </a>
+                <a href="/features" class="nav-link">
+                    <i data-lucide="shield" class="nav-link-icon"></i>
+                    Features
+                </a>
+                <a href="/detect" class="nav-link">
+                    <i data-lucide="camera" class="nav-link-icon"></i>
+                    Detection
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page Content -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <i data-lucide="shield" class="hero-icon"></i>
+            <h1 class="hero-title">WILDGUARD</h1>
+            <p class="hero-subtitle">Wildlife Monitoring & Intrusion Detection System</p>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <div class="about-container">
+            <div class="about-text">
+                <h2 class="about-title">About Our Project</h2>
+                <p class="about-description">
+                    WildGuard is an innovative wildlife monitoring and poacher detection system that leverages 
+                    the power of YOLOv8, a state-of-the-art AI model. Our system provides real-time detection 
+                    and monitoring capabilities to protect wildlife in their natural habitats.
+                </p>
+                <p class="about-description">
+                    By implementing advanced computer vision algorithms, WildGuard can identify both wildlife 
+                    and potential poaching threats, enabling quick response times and better protection of 
+                    endangered species.
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='images/slide.jpg') }}" alt="Wildlife monitoring">
+
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+    
+    </script>
+</body>
+</html>

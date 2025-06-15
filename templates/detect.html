@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection - WildGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/unified.css') }}">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-lucide="shield" class="nav-icon"></i>
+                <span class="brand-name">WildGuard</span>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i data-lucide="menu" class="menu-icon"></i>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link">
+                    <i data-lucide="home" class="nav-link-icon"></i>
+                    Home
+                </a>
+                <a href="/features" class="nav-link">
+                    <i data-lucide="shield" class="nav-link-icon"></i>
+                    Features
+                </a>
+                <a href="/detect" class="nav-link active">
+                    <i data-lucide="camera" class="nav-link-icon"></i>
+                    Detection
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- New Detection Mode Selection -->
+    <div class="container" id="modeSelection">
+        <h1>🔍 Detection Modes</h1>
+        <p class="detection-subtitle">Choose a detection type to proceed:</p>
+        
+        <div class="detection-grid">
+            <div class="detection-card" data-mode="animal" onclick="selectDetectionMode('animal')">
+                <div class="card-icon">🦁</div>
+                <h3>Animal & Human Detection</h3>
+                <p>Detects various animals and humans in the input image .</p>
+                <button class="card-btn">Try Now</button>
+            </div>
+            
+            <div class="detection-card" data-mode="ppe" onclick="selectDetectionMode('ppe')">
+                <div class="card-icon">🦺</div>
+                <h3>PPE Compliance</h3>
+                <p>Detects if individuals are wearing PPE like helmets, vests, gloves, and boots.</p>
+                <button class="card-btn">Try Now</button>
+            </div>
+            
+            <div class="detection-card" data-mode="weapon" onclick="selectDetectionMode('weapon')">
+                <div class="card-icon">🔫</div>
+                <h3>Weapon Detection</h3>
+                <p>Detects weapons like guns, rifles, and knives in the image .</p>
+                <button class="card-btn">Try Now</button>
+            </div>
+            
+            <div class="detection-card" data-mode="multi" onclick="selectDetectionMode('multi')">
+                <div class="card-icon">🔄</div>
+                <h3>Multi-Model Detection</h3>
+                <p>Combines animal/human, PPE, and weapon detection in a single run for images.</p>
+                <button class="card-btn">Try Now</button>
+            </div>
+
+            <div class="detection-card" data-mode="video-multi" onclick="selectDetectionMode('video-multi')">
+                <div class="card-icon">📹</div>
+                <h3>Multimodal Video Detection</h3>
+                <p>Detects animals, humans, PPE, and weapons in uploaded videos.</p>
+                <button class="card-btn">Try Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Two-column Analysis Section (Hidden Initially) -->
+    <div class="container hidden" id="analysisSection">
+        <div class="back-button" onclick="backToModeSelection()">
+            <i data-lucide="arrow-left"></i> Back to Detection Modes
+        </div>
+        
+        <h1 id="analysisTitle">Image Analysis</h1>
+        <p id="analysisDescription"></p>
+        
+        <div class="analysis-layout">
+            <!-- Left column: Upload section -->
+            <div class="upload-column">
+                <h3 id="uploadColumnTitle">Upload Image</h3> <!-- Added ID here -->
+                <div class="dropzone" id="dropzone" onclick="document.getElementById('imageInput').click()">
+                    <p id="instructions">Upload or drag an image here</p>
+                    <img id="uploadedImage" class="hidden" />
+                    <div id="inputSpinner" class="input-spinner-container hidden">
+                        <div class="spinner-border"></div>
+                    </div>
+                </div>
+                
+                <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)" hidden>
+
+                <!-- Video Upload Section (Initially Hidden) -->
+                <div id="videoUploadSection" class="hidden">
+                    <div class="dropzone" id="videoDropzone" onclick="document.getElementById('videoInput').click()">
+                        <p id="videoInstructions">Upload or drag a video here</p>
+                        <video id="uploadedVideoPreview" class="hidden" controls></video>
+                        <div id="videoInputSpinner" class="input-spinner-container hidden">
+                            <div class="spinner-border"></div>
+                        </div>
+                    </div>
+                    <input type="file" id="videoInput" accept="video/*" onchange="previewVideo(event)" hidden>
+                </div>
+                
+                <div class="buttons">
+                    <button id="analyzeBtn" class="btn btn-primary" onclick="runAnalysis()">Run Analysis</button>
+                    <button id="resetBtn" class="btn btn-danger" onclick="resetUpload()">Reset</button>
+                </div>
+            </div>
+            
+            <!-- Right column: Results section -->
+            <div class="results-column">
+                <h3 id="resultTitle">Detection Results</h3>
+                <div class="result-container" id="resultContainer">
+                    <!-- Placeholder message when no image is analyzed yet -->
+                    <div id="placeholder-message">
+                        <p>Upload an image and click "Run Analysis" to see detection results.</p>
+                    </div>
+                    
+                    <!-- Loading indicator - hidden initially -->
+                    <div id="resultLoadingOverlay" class="result-loading hidden">
+                        <div class="spinner-border"></div>
+                        <p>Processing...</p> <!-- Generic message -->
+                    </div>
+                    
+                    <!-- Result image - hidden initially -->
+                    <div class="detection-image hidden" id="resultImageContainer">
+                        <img id="detectionResult" alt="Detection results" />
+                    </div>
+
+                    <!-- Result video - hidden initially -->
+                    <div class="detection-video hidden" id="resultVideoContainer">
+                        <video id="detectionResultVideo" controls autoplay muted loop></video>
+                        <p id="videoResultSummary"></p> <!-- For any text summary for video -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <!-- Include scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="{{ url_for('static', filename='script1.js') }}"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle function
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
