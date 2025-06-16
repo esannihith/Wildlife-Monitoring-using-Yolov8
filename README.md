@@ -39,29 +39,40 @@ The primary purpose of WildGuard is to offer a centralized platform for leveragi
 
 ## Screenshots
 
-```markdown
-![Home Page](static\samples\Home.png)
-*Caption: The WildGuard home page.*
+<table>
+  <tr>
+    <td align="center">
+      <img src="static/samples/Home.png" width="300"/><br/>
+      <sub><b>Home Page</b><br/>The WildGuard home page.</sub>
+    </td>
+    <td align="center">
+      <img src="static/samples/Detection-modes.png" width="300"/><br/>
+      <sub><b>Detection Mode Selection</b><br/>Selecting a detection mode.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="static/samples/upload-preview.png" width="300"/><br/>
+      <sub><b>Image Upload</b><br/>Image upload interface.</sub>
+    </td>
+    <td align="center">
+      <img src="static/samples/image-result.jpg" width="300"/><br/>
+      <sub><b>Animal Detection</b><br/>Animal detection result with bounding boxes.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="static/samples/image-result1.jpg" width="300"/><br/>
+      <sub><b>Weapon Detection</b><br/>Weapon detection result with bounding boxes.</sub>
+    </td>
+    <td align="center">
+      <img src="static/samples/multi-modal.jpg" width="300"/><br/>
+      <sub><b>Multimodal Detection</b><br/>Multimodal detection result with bounding boxes.</sub>
+    </td>
+  </tr>
+</table>
 
-![Detection Mode Selection](static\samples\Detection-modes.png)
-*Caption: Selecting a detection mode.*
 
-![Image Upload Section](static\samples\upload-preview.png)
-*Caption: Image upload interface.*
-
-![Image Detection Result](static\samples\image-result.jpg)
-*Caption: Example of an animal detection result with bounding boxes.*
-
-![Image Detection Result](static\samples\image-result1.jpg)
-*Caption: Example of an animal detection result with bounding boxes.*
-
-![Image Detection Result](static\samples\multi-modal.jpg)
-*Caption: Example of an multimodal detection result with bounding boxes.*
-
-
-
-
-```
 
 ## Installation
 
@@ -95,20 +106,26 @@ Follow these steps to set up and run the project locally:
     ```env
     # For Animal Detection (Roboflow)
     # Dataset: https://app.roboflow.com/sannihith-wghgn/animal-detection-kq9h0/models
-    ROBOFLOW_API_KEY_ANIMAL="YOUR_ROBOFLOW_API_KEY" # Replace with your Roboflow API Key
-    ROBOFLOW_MODEL_ID_ANIMAL="YOUR_ANIMAL_MODEL_ID"  # e.g., animal-detection-kq9h0
-    ROBOFLOW_MODEL_VERSION_ANIMAL="YOUR_ANIMAL_MODEL_VERSION" # e.g., 4
+    API_KEY=\"YOUR_ROBOFLOW_API_KEY\" # Replace with your Roboflow API Key
+    MODEL_ID=\"YOUR_ANIMAL_MODEL_ID\"  # e.g., animal-detection-kq9h0
+    MODEL_VERSION=\"YOUR_ANIMAL_MODEL_VERSION\" # e.g., 4
 
     # For Weapon Detection (Roboflow)
     # Dataset: https://app.roboflow.com/sannihith-wghgn/rifle-6srh6-r8swv/models
-    ROBOFLOW_API_KEY_WEAPON="YOUR_ROBOFLOW_API_KEY" # Replace with your Roboflow API Key (can be the same as above)
-    ROBOFLOW_MODEL_ID_WEAPON="YOUR_WEAPON_MODEL_ID" # e.g., rifle-6srh6-r8swv
-    ROBOFLOW_MODEL_VERSION_WEAPON="YOUR_WEAPON_MODEL_VERSION" # e.g., 1
+    WEAPON_API_KEY=\"YOUR_ROBOFLOW_API_KEY\" # Replace with your Roboflow API Key (can be the same as above)
+    WEAPON_MODEL_ID=\"YOUR_WEAPON_MODEL_ID\" # e.g., rifle-6srh6-r8swv
+    WEAPON_MODEL_VERSION=\"YOUR_WEAPON_MODEL_VERSION\" # e.g., 1
 
-    # Optional: Roboflow API URL (if different from default)
-    # ROBOFLOW_API_URL="https://detect.roboflow.com"
+    # General Roboflow API URL (if different from default)
+    ROBOFLOW_API_URL=\"https://detect.roboflow.com\"
+    
+    # Flask specific
+    FLASK_ENV=\"development\"
+
+    # Optional: Request Timeout
+    REQUEST_TIMEOUT=\"120\" 
     ```
-    *   Replace placeholders like `\"YOUR_ROBOFLOW_API_KEY\"`, `\"YOUR_ANIMAL_MODEL_ID\"`, etc., with your actual details from Roboflow.
+    *   Replace placeholders like `\\\"YOUR_ROBOFLOW_API_KEY\\\"`, `\\\"YOUR_ANIMAL_MODEL_ID\\\"`, etc., with your actual details from Roboflow.
     *   You can find your API key and model-specific IDs/versions on your Roboflow dashboard under the respective projects.
 
 5.  **Ensure PPE Model Availability:**
@@ -138,15 +155,17 @@ Follow these steps to set up and run the project locally:
 
 ### Environment Variables
 
-The project uses a `.env` file to manage API keys and model configurations. Refer to the \"Set Up Environment Variables\" section under [Installation](#installation) for details on the required variables:
+The project uses a `.env` file to manage API keys and model configurations. Refer to the \\\"Set Up Environment Variables\\\" section under [Installation](#installation) for details on the required variables:
 
-*   `ROBOFLOW_API_KEY_ANIMAL`: Your Roboflow API key. Get this from your Roboflow account.
-*   `ROBOFLOW_MODEL_ID_ANIMAL`: The model ID for your Roboflow animal detection project (e.g., `animal-detection-kq9h0`). Found on the model page at [Roboflow Animal Detection](https://app.roboflow.com/sannihith-wghgn/animal-detection-kq9h0/models).
-*   `ROBOFLOW_MODEL_VERSION_ANIMAL`: The version number of your Roboflow animal detection model (e.g., `4`). Found on the model page.
-*   `ROBOFLOW_API_KEY_WEAPON`: Your Roboflow API key (can be the same as for the animal model).
-*   `ROBOFLOW_MODEL_ID_WEAPON`: The model ID for your Roboflow weapon detection project (e.g., `rifle-6srh6-r8swv`). Found on the model page at [Roboflow Weapon Detection](https://app.roboflow.com/sannihith-wghgn/rifle-6srh6-r8swv/models).
-*   `ROBOFLOW_MODEL_VERSION_WEAPON`: The version number of your Roboflow weapon detection model (e.g., `1`). Found on the model page.
+*   `API_KEY`: Your Roboflow API key for the animal detection model. Get this from your Roboflow account.
+*   `MODEL_ID`: The model ID for your Roboflow animal detection project (e.g., `animal-detection-kq9h0`). Found on the model page at [Roboflow Animal Detection](https://app.roboflow.com/sannihith-wghgn/animal-detection-kq9h0/models).
+*   `MODEL_VERSION`: The version number of your Roboflow animal detection model (e.g., `4`). Found on the model page.
+*   `WEAPON_API_KEY`: Your Roboflow API key for the weapon detection model (can be the same as for the animal model).
+*   `WEAPON_MODEL_ID`: The model ID for your Roboflow weapon detection project (e.g., `rifle-6srh6-r8swv`). Found on the model page at [Roboflow Weapon Detection](https://app.roboflow.com/sannihith-wghgn/rifle-6srh6-r8swv/models).
+*   `WEAPON_MODEL_VERSION`: The version number of your Roboflow weapon detection model (e.g., `1`). Found on the model page.
 *   `ROBOFLOW_API_URL` (Optional): The base URL for the Roboflow API. Defaults to `https://detect.roboflow.com`.
+*   `FLASK_ENV`: Sets the Flask environment (e.g., `development`, `production`).
+*   `REQUEST_TIMEOUT` (Optional): Sets the timeout for requests to external APIs (e.g., Roboflow) in seconds.
 
 ### PPE Model
 
