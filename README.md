@@ -1,14 +1,12 @@
 # WildGuard: AI-Powered Multi-Model Detection Dashboard
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/esannihith/Wildlife-Monitoring-using-Yolov8.svg)](https://github.com/esannihith/Wildlife-Monitoring-using-Yolov8/issues)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/esannihith/Wildlife-Monitoring-using-Yolov8/python-app.yml?branch=main)](https://github.com/esannihith/Wildlife-Monitoring-using-Yolov8/actions)
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![Flask Version](https://img.shields.io/badge/flask-2.3%2B-green.svg)](https://flask.palletsprojects.com/)
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Roboflow Animal Detection](https://img.shields.io/badge/Roboflow-Animal%20Detection-blue)](https://app.roboflow.com/sannihith-wghgn/animal-detection-kq9h0/models)
 [![Roboflow Weapon Detection](https://img.shields.io/badge/Roboflow-Weapon%20Detection-blue)](https://app.roboflow.com/sannihith-wghgn/rifle-6srh6-r8swv/models)
-[![Precision](https://img.shields.io/badge/Precision-80%25-brightgreen.svg)](#)
+[![Precision](https://img.shields.io/badge/Precision-90%25-brightgreen.svg)](#)
 
 
 WildGuard is a Flask-based web application that provides a user-friendly dashboard for performing various AI-powered detections on images and videos. It integrates multiple detection models to identify animals, humans, Personal Protective Equipment (PPE), and weapons.
